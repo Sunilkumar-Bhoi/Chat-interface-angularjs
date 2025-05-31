@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html ng-app="chatApp" ng-class="{'dark-theme': themeService.isDark}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AngularJS Chat App</title>
+    <link rel="stylesheet" href="assets/libs/font-awesome.css">
+    <link rel="stylesheet" href="app/styles/main.css">
+</head>
+<body>
+    <div class="container" ng-controller="ChatController as chatCtrl">
+        <!-- Navbar -->
+        <nav class="navbar">
+            <div class="logo">ChatApp</div>
+            <ul class="nav-links" ng-class="{'active': mobileMenuOpen}">
+                <li><a href="#features">Features</a></li>
+                <li><a href="#about">About</a></li>
+                <li>
+                    <button id="theme-toggle" ng-click="themeService.toggleTheme()" aria-label="Toggle theme">
+                        <i class="fas" ng-class="themeService.isDark ? 'fa-sun' : 'fa-moon'"></i>
+                    </button>
+                </li>
+            </ul>
+            <div class="hamburger" ng-click="toggleMobileMenu()">
+                <div class="line" ng-class="{'line-1': mobileMenuOpen}"></div>
+                <div class="line" ng-class="{'line-2': mobileMenuOpen}"></div>
+                <div class="line" ng-class="{'line-3': mobileMenuOpen}"></div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main>
+            <!-- Chat Section -->
+            <section id="chat-section" class="chat-section">
+                <div class="chat-container">
+                    <div class="chat-header">
+                        <div class="user-info">
+                            <div class="avatar">
+                                <img ng-src="{{chatCtrl.currentContact.avatar}}" alt="User avatar">
+                                <online-status status="chatCtrl.currentContact.status"></online-status>
+                            </div>
+                            <div>
+                                <h3>{{chatCtrl.currentContact.name}}</h3>
+                                <p class="status">{{chatCtrl.currentContact.status}}</p>
+                            </div>
+                        </div>
+                        <div class="chat-actions">
+                            <button><i class="fas fa-phone"></i></button>
+                            <button><i class="fas fa-video"></i></button>
+                            <button><i class="fas fa-ellipsis-vertical"></i></button>
+                        </div>
+                    </div>
+
+                    <div class="chat-messages">
+                        <div class="message-date">Today</div>
+                        
+                        <div ng-repeat="message in chatCtrl.messages" 
+                             class="message" 
+                             ng-class="{'received': !message.sent, 'sent': message.sent}">
+                            <div class="message-content">
+                                <p>{{message.text}}</p>
+                                <span class="message-time">{{message.time | date:'h:mm a'}}</span>
+                            </div>
+                        </div>
+                        
+                        <typing-indicator ng-if="chatCtrl.isTyping" user="chatCtrl.currentContact.name"></typing-indicator>
+                    </div>
+
+                    <div class="chat-input">
+                        <button class="attachment-btn"><i class="fas fa-paperclip"></i></button>
+                        <input type="text" 
+                               ng-model="chatCtrl.newMessage" 
+                               placeholder="Type a message..." 
+                               ng-keyup="$event.keyCode === 13 && chatCtrl.sendMessage()">
+                        <button class="send-btn" ng-click="chatCtrl.sendMessage()"><i class="fas fa-paper-plane"></i></button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Features Section -->
+            <section id="features" class="features-section">
+                <h2>Features</h2>
+                <div class="features-grid">
+                    <div class="feature-card" ng-repeat="feature in chatCtrl.features">
+                        <i class="fas" ng-class="feature.icon"></i>
+                        <h3>{{feature.title}}</h3>
+                        <p>{{feature.description}}</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- About Section -->
+            <section id="about" class="about-section">
+                <h2>About ChatApp</h2>
+                <p>ChatApp is a modern messaging platform designed with user experience in mind. Our intuitive interface and powerful features make communication simple and enjoyable.</p>
+                <p>With seamless synchronization across all your devices, you'll never miss an important message again.</p>
+                <div class="tech-stack">
+                    <h3>Built With:</h3>
+                    <div class="tech-icons">
+                        <i class="fab fa-html5" title="HTML5"></i>
+                        <i class="fab fa-css3-alt" title="CSS3"></i>
+                        <i class="fab fa-js" title="JavaScript"></i>
+                        <i class="fab fa-angular" title="AngularJS"></i>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; {{chatCtrl.currentYear}} ChatApp. All rights reserved.</p>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+            </div>
+        </footer>
+    </div>
+
+    <!-- AngularJS and dependencies -->
+    <script src="assets/libs/angular.min.js"></script>
+    <script src="assets/libs/angular-route.min.js"></script>
+    
+    <!-- App Scripts -->
+    <script src="app/app.js"></script>
+    <script src="app/controllers/chatController.js"></script>
+    <script src="app/services/themeService.js"></script>
+    <script src="app/directives/typingIndicator.js"></script>
+    <script src="app/directives/onlineStatus.js"></script>
+</body>
+</html>

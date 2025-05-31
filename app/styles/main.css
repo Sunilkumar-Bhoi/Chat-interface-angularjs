@@ -1,0 +1,30 @@
+/* Same CSS as in the original project, but with AngularJS-specific additions */
+
+/* Add these to your existing CSS */
+.dark-theme {
+    --bg-color: #121212;
+    --text-color: #f8f9fa;
+    --card-bg: #1e1e1e;
+    --input-bg: #2d2d2d;
+    --border-color: #333333;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* Animation for mobile menu */
+.line-1 {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+.line-2 {
+    opacity: 0;
+}
+.line-3 {
+    transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/* Status indicator colors */
+.online-status.online {
+    background-color: #4cc9f0;
+}
+.online-status.offline {
+    background-color: #f72585;
+}
