@@ -75,6 +75,7 @@ function($scope, $timeout, themeService) {
                 time: new Date(),
                 sent: false
             });
+            
         }, 2000);
     };
     

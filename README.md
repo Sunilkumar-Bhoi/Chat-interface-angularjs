@@ -50,9 +50,9 @@
 │   ├── 📁 controllers/      # AngularJS controllers
 │   ├── 📁 directives/       # Custom AngularJS directives
 │   ├── 📁 services/         # AngularJS services
-│   └── 📁 styles/           # CSS stylesheets
-├── 📁 assets/               # Static assets
-└── 📄 README.md             # This documentation file
+│   └── 📁 styles/           # CSS stylesheets 
+|
+📄 README.md             # This documentation file
 ```
 
 ## 🎨 Customization
@@ -106,4 +106,4 @@ Try the live demo: [https://sunilkumar-bhoi.github.io/Chat-interface-angularjs](
 
 **👨‍💻 Created by Sunil Kumar Bhoi**  
 [🔗 GitHub Profile](https://github.com/Sunilkumar-Bhoi)  
-💌sunilbhoi.dev@gmail.com
+💌 sunilbhoi.dev@gmail.com
